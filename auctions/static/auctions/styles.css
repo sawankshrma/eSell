@@ -1,3 +1,131 @@
 body {
-    padding: 10px;
+    background-color: #f0f0f5;
+    padding: 10px;  
+}
+
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.register-heading {
+    text-align: center;
+}
+
+.spacer-small {
+    height: 10px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-form .form-group {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.register-button {
+    width: 60%;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+    margin-top: 10px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+}
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.login-heading {
+    text-align: center;
+}
+
+.spacer-small {
+    height: 10px;
+}
+
+.login-message {
+    text-align: center;
+    color: red;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-input {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.login-button {
+    width: 60%;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 15px;
+    margin-top: 0px;    
+    font-size: 50px;
+    }
+.login_status{
+    display: flex;
+    justify-content: right;
+    margin-right : 10px;
+}
+  
+
+.extras_1{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e5e5e9;
+    padding: 10px 0px;
+    border-radius: 10px;
+    display: flex;
+    gap: 5px;
+    font-size:17spx;
+        
+}
+
+.title_block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 80px;
 }
