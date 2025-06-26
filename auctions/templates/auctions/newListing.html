@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}New Listing{% endblock %}
+
+{% block body %}
+    <h2>New Listing</h2>
+
+    {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+                <form action = "{% url 'newlisting' %}", method = "post">
+                  {% csrf_token %}
+                  {{ form1 }}
+                  <input type="submit">   
+               </form>
+            {% else %}
+                Not signed in. Please sign in to add a new product.
+            {% endif %}
+    
+{% endblock %}
