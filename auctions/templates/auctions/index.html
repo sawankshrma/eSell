@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+   {% for listing in listings %}
+            <div class = "listings">
+                    <h3>{{ listing.title }}</h3> 
+                  <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" width = 30%><br>
+                    starting bid: {{ listing.starting_bid }}
+                    {% if is_active %}
+                    &#10060
+                       
+                    {% else %} &#9989
+                    {% endif %}
+
+
+                    
+            </div>
+        {% endfor %}
+{% endblock %}
