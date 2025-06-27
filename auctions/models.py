@@ -17,6 +17,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     starting_bid = models.DecimalField(max_digits=10, decimal_places=2)
+    current_bid = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES, default='HM')
     

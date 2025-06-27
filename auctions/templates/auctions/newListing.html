@@ -6,14 +6,38 @@
     <h2>New Listing</h2>
 
     {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-                <form action = "{% url 'newlisting' %}", method = "post">
-                  {% csrf_token %}
-                  {{ form1 }}
-                  <input type="submit">   
-               </form>
-            {% else %}
-                Not signed in. Please sign in to add a new product.
-            {% endif %}
-    
+        <!-- <div class="new-listing-msg">
+            Signed in as_ <strong>{{ user.username }}</strong>.
+        </div> -->
+
+        <form action="{% url 'newlisting' %}" method="post">
+            <div class = "wrapper-1">
+            <div class="form-group-1">
+            {% csrf_token %}
+
+            {% for field in form1 %}
+                
+                    
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                
+                
+            {% endfor %}
+
+
+            
+            </div>
+            </div>
+            <div id="btn-wrapper">
+                <input id="newlisting-btn" class="btn btn-primary login-button" type="submit" value="Create Listing">
+            </div>
+        </form>
+        </div>
+
+    {% else %}
+        <div class="new-listing-msg">
+            Not signed in. Please sign in to add a new product.
+        </div>
+    {% endif %}
 {% endblock %}

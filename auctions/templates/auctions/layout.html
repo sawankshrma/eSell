@@ -9,22 +9,28 @@
     </head>
     <body>
         
-       <div class = "login_status">
+       
+  
+         <div class = "title_block">
+               <h1> <strong> eSell</strong></h1>
+               <div class = "login_status">
                 {% if user.is_authenticated %}  
                     Signed in as_  <strong>{{  user.username }}</strong>.
                 {% else %}
                     Not signed in!
                 {% endif %}
         </div>
-  
-         <div class = "title_block">
-               <h1> <strong> eSell</strong></h1>
+        </div>
+        <div class = extras-wrapper>
                <div class = "extras_1">
         <div class = "extras">
             <ul class="nav">
                 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'all' %}">All Listings</a>
                 </li>
                  <li class="nav-item">
                     <!-- again url -->
@@ -59,6 +65,7 @@
         </div>
         </div>
         </div>
+        
        
         
         <hr>

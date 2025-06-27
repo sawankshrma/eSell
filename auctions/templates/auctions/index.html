@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    <h2>{{title}}</h2>
 <div class= "cards_wrapper">
    {% for listing in listings %}
            <div class = "cards_container">
@@ -16,10 +16,9 @@
                  <div class="card-footer">
                     <p class="card-title"><strong>{{ listing.title }}</strong></p>
                     <div class="card-meta">
-                        <span class="bid">Current bid: {{ listing.starting_bid }}</span> 
-                        <!-- change the current bid here... -->
-                       <span class="availability {% if is_active %}not-available{% else %}available{% endif %}">
-                            {% if is_active %}Sold Out{% else %}Available{% endif %}
+                        {% if listing.is_active %} <span class="bid">Current bid: ₹{{ listing.current_bid }}</span> 
+                        <span class="availability {% if is_active %}not-available{% else %}available{% endif %}">
+                            Available{% else %}Sold Out @ ₹{{ listing.current_bid }}{% endif %}
                             </span>
 
 

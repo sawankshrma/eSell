@@ -9,12 +9,18 @@ from .forms import ListingForm
 
 
 def index(request):
-    listings = Listing.objects.all()
-    
+    title = "Active Listings"
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all()
+        "listings": Listing.objects.filter(is_active=True),
+        "title" : title
     })
 
+def all(request):
+    title = "All Listings"
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.all(),
+        "title" : title
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -73,6 +79,7 @@ def newlisting(request):
         if (form1.is_valid()):
             listing = form1.save(commit=False) #Why? Because we want to set the owner (a field not included in the form) before saving.
             listing.owner = request.user
+            listing.current_bid = listing.starting_bid
             listing.save()
             return redirect('index')  ## change this to that listing page afterwards
         #something like
