@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -91,4 +91,16 @@ def newlisting(request):
     
     return render(request, "auctions/newListing.html", {
         "form1": ListingForm()
+    })
+
+def product(request, product_id):
+    try:
+        product = Listing.objects.get(id=product_id)
+    except Listing.DoesNotExist:
+        raise Http404("Flight not found.")
+    return render(request, "auctions/product.html", {
+        "listing": product,
+        "comments": product.comments.all(),
+        "bids": product.bids.all(),
+
     })

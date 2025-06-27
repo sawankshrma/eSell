@@ -1,0 +1,114 @@
+{% extends "auctions/layout.html" %}
+
+{% block styles %}
+
+<style>
+/* Override generic hover styles only on this page */
+.cards_container:hover {
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: default !important;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+    
+<div class = "product-wrap" style=" 
+/* background-color: pink; */
+ ">
+        <div class="cards_wrapper" style="justify-content: flex-start;
+         /* background-color: green; */
+         width :325px;">
+            <div class = "cards_container" style = "margin-left:30px;">
+               <div class="image-wrapper">
+                    {% if listing.image_url %}
+                        <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" style="border: 1px solid transparent; border-radius: 5px;">
+                    {% else %}
+                        <div class="no-image">No image available</div>
+                    {% endif %}
+                </div>
+
+                 <div class="card-footer">
+                    <p class="card-title"><strong>{{ listing.title }}</strong></p>
+                    <div class="card-meta">
+                        {% if listing.is_active %} <span class="bid">Current bid: ₹{{ listing.current_bid }}</span> 
+                        <span class="availability {% if is_active %}not-available{% else %}available{% endif %}">
+                            Available{% else %}Sold Out @ ₹{{ listing.current_bid }}{% endif %}
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        <div class = "product-info" style=" 
+        /* background-color: rgb(78, 51, 124); */
+         height:600px; width:680px !important;">
+            <div class = "product-intro" style=" 
+                /* background-color: red; */
+                 height:40px; margin-left:30px; " >
+                    <h4>{{listing.title}}</h4>
+                    <hr>
+                    <h6><strong>Description:-</strong></h6>
+                    {{listing.description}}
+                    <ul><br>
+                        <li>
+                           Seller:- <strong>@{{listing.owner.username}}</strong>, email_id: <strong>{{listing.owner.email}} </strong>
+                        <br> Initial Bid:- <strong>₹</strong> {{listing.starting_bid}}/-
+                        </li><br>
+                        <li>
+                            <div  class = "all-bids" style="
+
+                                height: 200px;
+                                width: 300px;
+                                overflow-y: auto;
+                                border: 1px solid #ccc;
+                                border-radius: 6px;
+                                padding: 10px;
+                                background-color: transparent;
+                                
+                            ">
+                            
+                                <strong>All Recent Bids:-</strong>
+                                <ul>
+                                    {% for bid in bids %}
+                                    
+                                    <li>@{{ bid.user.username }}:- <strong>₹</strong>{{bid.amount}}</li>
+                                    {% empty %}
+                                    <li>No bids made yet.</li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+            </div> 
+        </div> 
+        <div class = "comment-wrap" style="
+            margin-left: 20px
+            ;
+        ">
+            <div style = "height: 50px;"  ></div>
+            <div  class = "comments" style="
+
+                height: 300px;
+                width: 350px;
+                overflow-y: auto;
+                border: 2px solid #ccc;
+                border-radius: 6px;
+                padding: 10px;
+                background-color: transparent;
+                
+            ">
+            
+                <h5>Comments:-</h5>
+                <ul>
+                    {% for comment in comments %}
+                    
+                    <li><strong>@{{ comment.user.username }} </strong>:- {{comment.text}}</li>
+                    {% empty %}
+                    <li>No comments yet.</li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+</div>
+{% endblock %}

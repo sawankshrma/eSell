@@ -4,7 +4,7 @@
     <h2>{{title}}</h2>
 <div class= "cards_wrapper">
    {% for listing in listings %}
-           <div class = "cards_container">
+           <a href = "{% url 'product' listing.id %}"><div class = "cards_container">
                <div class="image-wrapper">
                     {% if listing.image_url %}
                         <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" style="border: 1px solid transparent; border-radius: 5px;">
@@ -25,6 +25,7 @@
                     </div>
                 </div>
             </div>
+            </a>
         {% endfor %}
 </div>       
 {% endblock %}
