@@ -2,20 +2,30 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-
+<div class= "cards_wrapper">
    {% for listing in listings %}
-            <div class = "listings">
-                    <h3>{{ listing.title }}</h3> 
-                  <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" width = 30%><br>
-                    starting bid: {{ listing.starting_bid }}
-                    {% if is_active %}
-                    &#10060
-                       
-                    {% else %} &#9989
+           <div class = "cards_container">
+               <div class="image-wrapper">
+                    {% if listing.image_url %}
+                        <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" style="border: 1px solid transparent; border-radius: 5px;">
+                    {% else %}
+                        <div class="no-image">No image available</div>
                     {% endif %}
+                </div>
+
+                 <div class="card-footer">
+                    <p class="card-title"><strong>{{ listing.title }}</strong></p>
+                    <div class="card-meta">
+                        <span class="bid">Current bid: {{ listing.starting_bid }}</span> 
+                        <!-- change the current bid here... -->
+                       <span class="availability {% if is_active %}not-available{% else %}available{% endif %}">
+                            {% if is_active %}Sold Out{% else %}Available{% endif %}
+                            </span>
 
 
-                    
+                    </div>
+                </div>
             </div>
         {% endfor %}
+</div>       
 {% endblock %}

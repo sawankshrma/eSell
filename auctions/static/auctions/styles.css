@@ -1,21 +1,79 @@
 body {
     background-color: #f0f0f5;
-    padding: 10px;  
+    padding: 10px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 0 0 15px;
+    font-size: 50px;
+}
+
+h2 {
+    margin-left: 15px;
+    color: rgb(68, 8, 8);
+}
+
+.nav-link {
+    color: rgb(68, 8, 8);
+}
+
+.nav-link:hover {
+    color: rgb(213, 104, 104);
+}
+
+.login-wrapper,
+.register-page,
+.cards_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    height: 55vh;
 }
 
 .register-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 60vh;
 }
 
-.register-container {
+.login-container,
+.register-container,
+.cards_container {
     width: 100%;
     max-width: 400px;
     min-width: 300px;
 }
 
+.cards_container {
+    width:320px;
+    background-color: #efe8e8;
+    border-radius: 15px;
+    margin: 8px;
+    height: auto;                         
+    display: flex;                        
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.cards_container:hover {
+    background-color: #ebe3e3;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.register-container {
+    max-width: 500px;
+}
+
+.login-heading,
 .register-heading {
     text-align: center;
 }
@@ -24,103 +82,54 @@ body {
     height: 10px;
 }
 
+.login-form,
 .register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.login-input,
 .register-form .form-group {
-    width: 100%;
+    width: 80%;
     margin-bottom: 10px;
 }
 
+.login-button,
 .register-button {
     width: 60%;
 }
 
+.login-message,
 .error-message {
     text-align: center;
     color: red;
     margin-top: 10px;
 }
 
+.register-link,
 .login-link {
     text-align: center;
     margin-top: 10px;
 }
-.login-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 55vh;
-}
 
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    min-width: 300px;
-}
-
-.login-heading {
-    text-align: center;
-}
-
-.spacer-small {
-    height: 10px;
-}
-
-.login-message {
-    text-align: center;
-    color: red;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.login-input {
-    width: 80%;
-    margin-bottom: 10px;
-}
-
-.login-button {
-    width: 60%;
-}
-
-.register-link {
-    text-align: center;
-    margin-top: 10px;
-}
-
-
-
-h1 {
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 15px;
-    margin-top: 0px;    
-    font-size: 50px;
-    }
-.login_status{
+.login_status {
     display: flex;
     justify-content: right;
-    margin-right : 10px;
+    margin-right: 10px;
 }
-  
 
-.extras_1{
+.extras_1 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #e5e5e9;
-    padding: 10px 0px;
+    background-color: #ebe3e3;
+    padding: 10px 0;
     border-radius: 10px;
     display: flex;
     gap: 5px;
-    font-size:17spx;
-        
+    font-size: 17px;
+    color: white;
 }
 
 .title_block {
@@ -128,4 +137,54 @@ h1 {
     display: flex;
     align-items: center;
     height: 80px;
+}
+
+
+/* ✅ Image and card footer layout */
+
+.image-wrapper {
+    height: 80%;               /* Fixed image area */
+    flex-shrink: 0;            /* Prevent it from shrinking */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-wrapper img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.no-image {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+}
+
+.card-footer {
+    background-color: transparent;
+    border: none;
+    height: 45%;              
+    display: flexbox;
+    flex-direction: column;
+}
+s
+
+.card-title {
+    margin: 5px 0px;
+    font-size: 16px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.available {
+    color: rgb(190, 131, 168);
+}
+
+.not-available {
+    color: rgb(213, 104, 104);
 }
