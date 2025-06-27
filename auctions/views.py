@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from .models import User, Listing
-from .forms import ListingForm
+from .forms import ListingForm, BiddingForm, CommentForm
 
 
 def index(request):
@@ -81,9 +81,9 @@ def newlisting(request):
             listing.owner = request.user
             listing.current_bid = listing.starting_bid
             listing.save()
-            return redirect('index')  ## change this to that listing page afterwards
+            # return redirect('index')  ## change this to that listing page afterwards
         #something like
-        #  return HttpResponseRedirect(reverse("entry", kwargs={"title": title}))
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/newListing.html", {
                 "form1": form1
@@ -93,14 +93,105 @@ def newlisting(request):
         "form1": ListingForm()
     })
 
-def product(request, product_id):
+def bid(request, product_id):
+    if request.method == "POST":
+        form2 = BiddingForm(request.POST)
+        if (form2.is_valid()):
+            bidding = form2.save(commit=False) 
+            try:
+                product = Listing.objects.get(id=product_id)
+            except Listing.DoesNotExist:
+                raise Http404("Product not found.")
+            if bidding.amount <= product.current_bid:
+                bidding.listing = product
+                form2.add_error('amount', "Bid must be greater than the current bid.")
+                product = bidding.listing
+                return render(request, "auctions/product.html", {
+                    "listing": product,
+                    "comments": product.comments.all(),
+                    "bids": product.bids.all(),
+                    "form2": form2,
+                    "form3" : CommentForm()
+                })
+            #Why? Because we want to set the owner (a field not included in the form) before saving.
+            bidding.user = request.user
+            bidding.listing = product = get_object_or_404(Listing, id=product_id)
+            bidding.save()
+            
+            # Update current bid
+            product.current_bid = bidding.amount
+            product.save()
+
+            return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
+        else:
+            return render(request, "auctions/Product.html", {
+                "listing": product,
+                "comments": product.comments.all(),
+                "bids": product.bids.all(),
+                "form2": form2,
+                "form3" : CommentForm()
+            })
+
     try:
         product = Listing.objects.get(id=product_id)
     except Listing.DoesNotExist:
-        raise Http404("Flight not found.")
+        raise Http404("Product not found.")
     return render(request, "auctions/product.html", {
         "listing": product,
         "comments": product.comments.all(),
         "bids": product.bids.all(),
+        "form2": BiddingForm(),
+        "form3" : CommentForm()
+
+    })
+
+def comment(request, product_id):
+    if request.method == "POST":
+        form3 = CommentForm(request.POST)
+        try:
+            product = Listing.objects.get(id=product_id)
+        except Listing.DoesNotExist:
+            raise Http404("Product not found.")            
+        if (form3.is_valid()):
+            comment = form3.save(commit=False) #Why? Because we want to set the owner (a field not included in the form) before saving.
+            comment.user = request.user
+            
+            comment.listing = product
+            comment.save()
+            return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
+        else:
+            return render(request, "auctions/Product.html", {
+                "listing": product,
+                "comments": product.comments.all(),
+                "bids": product.bids.all(),
+                "form2": BiddingForm(),
+                "form3" : form3
+            })
+    
+    try:
+        product = Listing.objects.get(id=product_id)
+    except Listing.DoesNotExist:
+        raise Http404("Product not found.")
+    return render(request, "auctions/product.html", {
+        "listing": product,
+        "comments": product.comments.all(),
+        "bids": product.bids.all(),
+        "form2": BiddingForm(),
+        "form3" : CommentForm()
+
+    })
+
+
+def product(request, product_id):
+    try:
+        product = Listing.objects.get(id=product_id)
+    except Listing.DoesNotExist:
+        raise Http404("Product not found.")
+    return render(request, "auctions/product.html", {
+        "listing": product,
+        "comments": product.comments.all(),
+        "bids": product.bids.all(),
+        "form2": BiddingForm(),
+        "form3" : CommentForm()
 
     })

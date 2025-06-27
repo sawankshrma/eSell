@@ -15,9 +15,7 @@ a:hover {
     margin: 0 0 0 30px;
     font-size: 50px;
 }
-#motto{
-    
-}
+
 
 h2 {
     margin-left: 15px;
@@ -169,21 +167,22 @@ h2 {
 }
 
 .login_status {
-    display: flex;
-    justify-content: right;
-    margin-right: 10px;
+   
+    margin-right: 2px;
 }
 
 .extras-wrapper{
     display: flex;
     justify-content: center;
-    width : 100%
+    width : 100%;
 }
 .extras_1 {
     display: inline-flex; 
     justify-content: center;
-    background-color: #ebe3e3;
-    padding: 7px 15px;
+
+    background-color:  #f5f0f0;
+     border: solid 1px #e1dada;
+    padding: 15px 7px;
     border-radius: 10px;
     font-size: 17px;
 }
@@ -192,6 +191,7 @@ h2 {
 .title_block {
     padding-top:10px;
     display: flex;
+   
     justify-content: space-between;
     height: auto;
 }

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Listing
+from .models import Listing, Bid, Comment
 
 class ListingForm(forms.ModelForm):
     class Meta:
@@ -31,5 +31,35 @@ class ListingForm(forms.ModelForm):
             'category': forms.Select(attrs={
                 'class': 'form-control-1',
                 'style': 'width: 30%;  height: 40px; margin-bottom: 5px; margin-top: 0px;'
+            }),
+        }
+
+class BiddingForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['amount']
+        labels = {
+            'amount': ''
+        }
+        widgets = {
+            'amount': forms.TextInput(attrs={
+                'placeholder': 'Enter the amount..',
+                'style' : 'height:70px; border-radius: 15px; width: 100%; padding: 7px; font-size:larger; '
+            }),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        labels = {
+            'text': ''
+        }
+        widgets = {
+            'text': forms.Textarea(attrs={
+                
+                'placeholder': 'Add a comment..',
+                'style': 'width: 85%; height: 90px; padding : 10px; background-color: transparent; border-radius:20px;'
+
             }),
         }

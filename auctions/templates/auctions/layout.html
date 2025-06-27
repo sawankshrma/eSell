@@ -16,16 +16,8 @@
             <a href = "{% url 'index' %}"><div id = "logo"> <strong> eSell</strong></div>
               
             </a>
-               
-               <div class = "login_status">
-                {% if user.is_authenticated %}  
-                    Signed in as_  <strong>{{  user.username }}</strong>.
-                {% else %}
-                    Not signed in!
-                {% endif %}
-        </div>
-        </div>
-        <div class = "extras-wrapper">
+
+            <div class = "extras-wrapper">
                <div class = "extras_1">
         <div class = "extras">
             <ul class="nav">
@@ -69,6 +61,16 @@
         </div>
         </div>
         </div>
+               
+               <div class = "login_status">
+                {% if user.is_authenticated %}  
+                    Signed in as_  <strong>{{  user.username }}</strong>.
+                {% else %}
+                    Not signed in!
+                {% endif %}
+        </div>
+        </div>
+        
         
        
         
