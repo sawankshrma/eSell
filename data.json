@@ -1,0 +1,186 @@
+[
+{
+  "model": "auctions.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$F6PEetW2BNq9enYBSbPSGp$cEwUwb08nPQmTXAyFb0z0rqw9dhl6jY53MnVXEinA7s=",
+    "last_login": "2025-06-28T15:54:16.096Z",
+    "is_superuser": false,
+    "username": "srijan",
+    "first_name": "",
+    "last_name": "",
+    "email": "sjthui@janh.cm",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-06-26T10:24:24.019Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "auctions.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$W7hDuY1tYxYxtTuqCcbJb4$M2QFzp/gY/xFcIMCAyTAcSbqdhRR2zBEBui7CCkb7aM=",
+    "last_login": "2025-06-28T12:26:00.525Z",
+    "is_superuser": true,
+    "username": "sawankshrma",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-06-26T10:25:31.352Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      5,
+      10
+    ]
+  }
+},
+{
+  "model": "auctions.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$cklvi2QnaHOqPX3SZz17N6$+NeJq5cqCZTcGGMXXu0YKV0P4Y3mLko8z8dDbaUia2M=",
+    "last_login": "2025-06-28T11:31:46.045Z",
+    "is_superuser": false,
+    "username": "gagan",
+    "first_name": "",
+    "last_name": "",
+    "email": "gagan@134",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-06-27T07:02:59.700Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      5,
+      6
+    ]
+  }
+},
+{
+  "model": "auctions.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$uWkSQfqA8ShT31Di19dPdo$72EsdJ7e8h+CrSgKVNjbmNOVtul0j7DxvGHguHSYSFo=",
+    "last_login": "2025-06-28T12:48:57.933Z",
+    "is_superuser": false,
+    "username": "shashwat",
+    "first_name": "",
+    "last_name": "",
+    "email": "alh@asdl.co",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-06-27T10:40:27.038Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "auctions.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$NoD5SFeFjtOLc2slGNffPJ$+QQj6Gw4S+dLVuFZfB4TR8iKYaMw+FFr9K5yE2crT6o=",
+    "last_login": "2025-06-28T12:36:29.160Z",
+    "is_superuser": false,
+    "username": "shushant",
+    "first_name": "",
+    "last_name": "",
+    "email": "saghkl@asdlkgh.cvo",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-06-27T11:04:34.338Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      4
+    ]
+  }
+},
+{
+  "model": "auctions.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Nh3cHuuQV2pkUgNoVUmnuI$X8iPG+STfWBwn5kvnjfdplacE/QXOlqztcjjf0BWBT8=",
+    "last_login": "2025-06-28T11:29:19.737Z",
+    "is_superuser": false,
+    "username": "pranav",
+    "first_name": "",
+    "last_name": "",
+    "email": "prnv@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-06-28T10:21:04Z",
+    "groups": [],
+    "user_permissions": [],
+    "watchlist": [
+      6,
+      8
+    ]
+  }
+},
+{
+  "model": "auctions.listing",
+  "pk": 1,
+  "fields": {
+    "title": "Crosscut Beige & Brown Wooden Cylinder Shaped Floor Lamp With Shelves",
+    "description": "Set content: 1 floor lamp with 3 shelves, Type: Floor lamp, Color: Beige and brown, Material: Metal",
+    "starting_bid": "2500.00",
+    "current_bid": "2700.00",
+    "image_url": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/28255504/2024/6/10/c725ee0a-4a53-46d7-b966-ef57f76887d91718001481163-Crosscut-Beige--Brown-Wooden-Cylinder-Shaped-Floor-Lamp-With-2.jpg",
+    "category": "HM",
+    "is_active": true,
+    "created_at": "2025-06-26T12:47:53.584Z",
+    "owner": 1,
+    "winner": null
+  }
+},
+{
+  "model": "auctions.listing",
+  "pk": 2,
+  "fields": {
+    "title": "Cotton Linen: Berry",
+    "description": "oversized-half shirt, 85% Cotton 15% Linen, Machine Wash",
+    "starting_bid": "1000.00",
+    "current_bid": "1450.00",
+    "image_url": "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1713860734_6695773.jpg",
+    "category": "FN",
+    "is_active": true,
+    "created_at": "2025-06-26T12:49:42.106Z",
+    "owner": 1,
+    "winner": null
+  }
+},
+{
+  "model": "auctions.listing",
+  "pk": 3,
+  "fields": {
+    "title": "charcoal-grey-regular-fit-jeans",
+    "description": "Make sure you've got the denim style nailed down to a T. These regular fit jeans from snitch comes with a cool looking flap and charcoal grey color that will look fresh with everything in your closet. The deep pockets definitely pass the keys, phone and wallet check.",
+    "starting_bid": "1400.00",
+    "current_bid": "1850.00",
+    "image_url": "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSO4594-01_1_792449c1-5044-4458-8df2-b76d065d67e6.jpg?v=1738652090&quality=20",
+    "category": "FN",
+    "is_active": true,
+    "created_at": "2025-06-26T17:12:58.570Z",
+    "owner": 1,
+    "winner": null
+  }
+},
+{
+  "model": "auctions.listing",
+  "pk": 4,
+  "fields": {
+    "title": "Oversized Hoodie: Charcoal",
+    "description": 

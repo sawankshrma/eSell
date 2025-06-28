@@ -19,5 +19,6 @@ urlpatterns = [
     path("categories/<str:id>", views.categories_show, name="categories_show"),
 
 
+
 ]
 
