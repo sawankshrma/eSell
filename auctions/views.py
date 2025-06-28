@@ -159,7 +159,7 @@ def bid(request, product_id):
 
             return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
         else:
-            return render(request, "auctions/Product.html", {
+            return render(request, "auctions/product.html", {
                 "listing": product,
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
@@ -198,7 +198,7 @@ def comment(request, product_id):
             comment.save()
             return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
         else:
-            return render(request, "auctions/Product.html", {
+            return render(request, "auctions/product.html", {
                 "listing": product,
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
@@ -238,7 +238,7 @@ def product(request, product_id):
     if request.user.is_authenticated:
         context["added"] = is_in_watchlist(request.user, product)
 
-    return render(request, "auctions/Product.html", context)
+    return render(request, "auctions/product.html", context)
 
 
 @login_required
