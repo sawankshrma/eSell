@@ -58,7 +58,7 @@
             <h4>{{ listing.title }}</h4>
             <hr>
             <h5><strong>Description:-</strong></h5>
-            <div style="font-size: large;">
+            <div >
                 {{ listing.description }}
                 <ul><br>
                     <li>
@@ -93,6 +93,14 @@
 
                 <!-- heavy if-else logic now -->
                 {% if user.is_authenticated %}
+                    <!-- <div>
+                        <form action = "{% url 'sell' listing.id %}" method="post">
+                                <input type="hidden" name="user" value="{{ request.user }}">
+                                {%csrf_token%}
+                                <button type="toggle" style="width: 170px; height: 50px; background-color: antiquewhite; 
+                                border-radius:20px; border: solid rosybrown; padding: 7px 20px;">Add to watchlist</button>
+                        </form>
+                    </div> -->
                     <div class="new_bid" style="
                         /* background-color: pink; */
                         width: 400px;
@@ -101,9 +109,17 @@
                         justify-content: center;
                     ">
                         {% if listing.is_active %}
-                            {% if request.user == listing.owner %}
+                            {% if request.user == listing.owner and listing.bids.all %}
                                 <!-- add option to finally sell -->
-                            {% else %}
+                                 <form action = "{% url 'sell' listing.id %}" method="post">
+                                    <!-- <input type="hidden" name="user" value="{{ request.user }}"> -->
+                                        {%csrf_token%}
+                                        <button type="submit" style="width: 170px; height: 50px; background-color: antiquewhite; 
+                                        border-radius:20px; border: solid rosybrown; color:rgb(108, 9, 9); padding: 7px 20px;"
+                                        onclick="return confirm('Are you sure you want to sell this item @ ₹{{ listing.current_bid }}?')">Sell this Item</button>
+                                 </form>
+                            
+                            {% elif request.user != listing.owner%}
                                 <h2 style="width: 100%; text-align: center; margin-left:0px;"><br>Bid Now..<br></h2>
                                 <form action="{% url 'bid' listing.id %}" method="post">
                                     {% csrf_token %}
@@ -114,6 +130,7 @@
                                                type="submit" value="Raise Bid">
                                     </div>
                                 </form>
+                            <!-- {{else}} -->
                             {% endif %}
                         {% else %}
                             <h2><br>Sold Out</h2>

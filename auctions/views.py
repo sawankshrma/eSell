@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -73,6 +74,7 @@ def register(request):
     else:       
         return render(request, "auctions/register.html")
     
+
 def newlisting(request):
     if request.method == "POST":
         form1 = ListingForm(request.POST)
@@ -93,6 +95,7 @@ def newlisting(request):
         "form1": ListingForm()
     })
 
+@login_required
 def bid(request, product_id):
     if request.method == "POST":
         form2 = BiddingForm(request.POST)
@@ -145,6 +148,7 @@ def bid(request, product_id):
 
     })
 
+@login_required
 def comment(request, product_id):
     if request.method == "POST":
         form3 = CommentForm(request.POST)
@@ -194,4 +198,20 @@ def product(request, product_id):
         "form2": BiddingForm(),
         "form3" : CommentForm()
 
+    })
+
+@login_required
+def sell(request, product_id):
+    try:
+        product = Listing.objects.get(id=product_id)
+    except Listing.DoesNotExist:
+        raise Http404("Product not found.")
+    product.is_active = False
+    product.save()
+    return render(request, "auctions/product.html", {
+        "listing": product,
+        "comments": product.comments.all(),
+        "bids": product.bids.all(),
+        "form2": BiddingForm(),
+        "form3" : CommentForm()
     })
