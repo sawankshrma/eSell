@@ -1,7 +1,7 @@
 [
   {
-    "model": "auth.user",
-    "pk": 2,
+    "model": "auctions.user",
+    "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$1000000$W7hDuY1tYxYxtTuqCcbJb4$M2QFzp/gY/xFcIMCAyTAcSbqdhRR2zBEBui7CCkb7aM=",
       "last_login": null,
@@ -9,27 +9,28 @@
       "username": "sawankshrma",
       "first_name": "",
       "last_name": "",
-      "email": "",
+      "email": "thesawan47@gmail.com",
       "is_staff": true,
       "is_active": true,
       "date_joined": "2025-06-26T10:25:31.352Z",
       "groups": [],
-      "user_permissions": []
+      "user_permissions": [],
+      "watchlist": []
     }
   },
   {
     "model": "auctions.listing",
-    "pk": 10,
+    "pk": 1,
     "fields": {
-      "title": "U.S. Polo Assn. Ruben Men PU Lace-Ups Sneakers",
-      "description": "A pair of round toe grey sneakers ,has regular styling, Lace-ups detail, Pu upper, Cushioned footbed, Textured and patterned outsole",
-      "starting_bid": "2000.00",
-      "current_bid": "2000.00",
-      "image_url": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/30560486/2024/9/16/93937d5f-25fd-41de-8669-3c0853e1c63d1726481418045-US-Polo-Assn-Ruben-Men-PU-Lace-Ups-Sneakers-7271726481417549-1.jpg",
+      "title": "Test Listing by Sawankshrma",
+      "description": "Simple description.",
+      "starting_bid": "1000.00",
+      "current_bid": "1000.00",
+      "image_url": "https://example.com/image.jpg",
       "category": "FN",
       "is_active": true,
-      "created_at": "2025-06-28T12:28:43.128Z",
-      "owner": 2,
+      "created_at": "2025-06-28T12:00:00.000Z",
+      "owner": 1,
       "winner": null
     }
   }
