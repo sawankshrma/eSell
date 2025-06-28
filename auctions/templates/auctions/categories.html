@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %} Categories {%endblock%}
+
+{% block body %}
+    <h2>Categories</h2>
+<div class= "cards_wrapper">
+<a href = "{% url 'categories_show' 'FN' %}">
+    <div class="cards_container" style="width: 540px !important; max-width:640px !important; background-color:rgb(200, 181, 153)">
+        <div class="image-wrapper">
+            <img src="https://assets.teenvogue.com/photos/61e1dc048cae37dfe921d67f/16:9/w_2560%2Cc_limit/GettyImages-1345379773.jpg" alt="fashion" style="border: 1px solid transparent; border-radius: 5px;">    
+        </div>
+        <div class="card-footer">
+            <p class="card-title" style="font-size: x-large;"><strong>Fashion</strong></p>
+        </div>
+    </div></a>
+
+    <a href = "{% url 'categories_show' 'TY' %}">
+    <div class="cards_container" style="width: 540px !important; max-width:640px !important; background-color:rgb(200, 181, 153)">
+        <div class="image-wrapper">
+            <img src="https://www.intertek.com/contentassets/c0b9ea52ebd24b8bae6fe5bd96093215/products-hardlines-toys-childrens-products-card.jpg" alt="toys" style="border: 1px solid transparent; border-radius: 5px;">    
+        </div>
+        <div class="card-footer">
+            <p class="card-title" style="font-size: x-large;"><strong>Toys</strong></p>
+        </div>
+    </div></a>
+
+<a href = "{% url 'categories_show' 'EL' %}">
+    <div class="cards_container" style="width: 540px !important; max-width:640px !important; background-color:rgb(200, 181, 153)">
+        <div class="image-wrapper">
+            <img src="https://static.wixstatic.com/media/11062b_4e1f27efe0c54a1ba4b1d603ac8370a8~mv2.jpg/v1/fill/w_640,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_4e1f27efe0c54a1ba4b1d603ac8370a8~mv2.jpg" alt="electronics" style="border: 1px solid transparent; border-radius: 5px;">    
+        </div>
+        <div class="card-footer">
+            <p class="card-title" style="font-size: x-large;"><strong>Electronics</strong></p>
+        </div>
+    </div></a>
+
+
+    <a href = "{% url 'categories_show' 'HM' %}">
+    <div class="cards_container" style="width: 540px !important; max-width:640px !important; background-color:rgb(200, 181, 153)">
+        <div class="image-wrapper">
+            <img src="https://c.ndtvimg.com/2021-07/0dvmrmpo_home-decor-650_625x300_09_July_21.jpg" alt="home" style="border: 1px solid transparent; border-radius: 5px;">    
+        </div>
+        <div class="card-footer">
+            <p class="card-title" style="font-size: x-large;"><strong>Home</strong></p>
+        </div>
+    </div></a>
+
+</div>
+
+     
+{% endblock %}
+ 

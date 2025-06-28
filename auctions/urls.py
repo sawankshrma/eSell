@@ -15,7 +15,9 @@ urlpatterns = [
     path("<int:product_id>/sell/", views.sell, name="sell"),
     path("<int:product_id>/like/", views.like, name = "like"),
     path("myWatchList/", views.liked, name="liked"),
-    
+    path("categories/", views.categories, name="categories"),
+    path("categories/<str:id>", views.categories_show, name="categories_show"),
+
 
 ]
 

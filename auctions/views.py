@@ -20,6 +20,20 @@ def index(request):
         "title" : title
     })
 
+def categories(request):
+    return render(request, "auctions/categories.html")
+
+def categories_show(request, id):
+    
+    category_dict = dict(Listing.CATEGORY_CHOICES)
+    title = category_dict.get(id, "Unknown Category")
+
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.filter(category=id),
+        "title": title
+    })
+
+
 def all(request):
     title = "All Listings"
     return render(request, "auctions/index.html", {
