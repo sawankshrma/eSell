@@ -9,6 +9,10 @@ from .models import User, Listing
 from .forms import ListingForm, BiddingForm, CommentForm
 
 
+def is_in_watchlist(user, product):
+    return product in user.watchlist.all()
+
+
 def index(request):
     title = "Active Listings"
     return render(request, "auctions/index.html", {
@@ -20,6 +24,14 @@ def all(request):
     title = "All Listings"
     return render(request, "auctions/index.html", {
         "listings": Listing.objects.all(),
+        "title" : title
+    })
+
+@login_required
+def liked(request):
+    title = "My WatchList"
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.filter(watched_by=request.user),
         "title" : title
     })
 
@@ -105,16 +117,20 @@ def bid(request, product_id):
                 product = Listing.objects.get(id=product_id)
             except Listing.DoesNotExist:
                 raise Http404("Product not found.")
-            if bidding.amount <= product.current_bid:
+            if bidding.amount < product.current_bid:
                 bidding.listing = product
                 form2.add_error('amount', "Bid must be greater than the current bid.")
                 product = bidding.listing
+
+                
+
                 return render(request, "auctions/product.html", {
                     "listing": product,
                     "comments": product.comments.all(),
                     "bids": product.bids.all(),
                     "form2": form2,
-                    "form3" : CommentForm()
+                    "form3" : CommentForm(),
+                    "added" : is_in_watchlist(request.user, product)
                 })
             #Why? Because we want to set the owner (a field not included in the form) before saving.
             bidding.user = request.user
@@ -132,7 +148,8 @@ def bid(request, product_id):
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
                 "form2": form2,
-                "form3" : CommentForm()
+                "form3" : CommentForm(),
+                "added" : is_in_watchlist(request.user, product)
             })
 
     try:
@@ -144,7 +161,8 @@ def bid(request, product_id):
         "comments": product.comments.all(),
         "bids": product.bids.all(),
         "form2": BiddingForm(),
-        "form3" : CommentForm()
+        "form3" : CommentForm(),
+        "added" : is_in_watchlist(request.user, product)
 
     })
 
@@ -169,7 +187,8 @@ def comment(request, product_id):
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
                 "form2": BiddingForm(),
-                "form3" : form3
+                "form3" : form3,
+                "added" : is_in_watchlist(request.user, product)
             })
     
     try:
@@ -181,7 +200,8 @@ def comment(request, product_id):
         "comments": product.comments.all(),
         "bids": product.bids.all(),
         "form2": BiddingForm(),
-        "form3" : CommentForm()
+        "form3" : CommentForm(),
+        "added" : is_in_watchlist(request.user, product)
 
     })
 
@@ -191,14 +211,19 @@ def product(request, product_id):
         product = Listing.objects.get(id=product_id)
     except Listing.DoesNotExist:
         raise Http404("Product not found.")
-    return render(request, "auctions/product.html", {
-        "listing": product,
-        "comments": product.comments.all(),
-        "bids": product.bids.all(),
-        "form2": BiddingForm(),
-        "form3" : CommentForm()
+    
+    context = {
+    "listing": product,
+    "comments": product.comments.all(),
+    "bids": product.bids.all(),
+    "form2": BiddingForm(),
+    "form3": CommentForm(),
+}
+    if request.user.is_authenticated:
+        context["added"] = is_in_watchlist(request.user, product)
 
-    })
+    return render(request, "auctions/Product.html", context)
+
 
 @login_required
 def sell(request, product_id):
@@ -213,5 +238,31 @@ def sell(request, product_id):
         "comments": product.comments.all(),
         "bids": product.bids.all(),
         "form2": BiddingForm(),
-        "form3" : CommentForm()
+        "form3" : CommentForm(),
+        "added" : is_in_watchlist(request.user, product)
     })
+
+@login_required
+def like(request, product_id):
+    try:
+        product = Listing.objects.get(id=product_id)
+    except Listing.DoesNotExist:
+        raise Http404("Product not found.")
+    
+    if is_in_watchlist(request.user, product):
+        request.user.watchlist.remove(product)
+    else:
+        request.user.watchlist.add(product)
+
+    # No need to manually save user or product for M2M changes.
+
+
+    return render(request, "auctions/product.html", {
+        "listing": product,
+        "comments": product.comments.all(),
+        "bids": product.bids.all(),
+        "form2": BiddingForm(),
+        "form3" : CommentForm(),
+        "added" : is_in_watchlist(request.user, product)
+    })
+

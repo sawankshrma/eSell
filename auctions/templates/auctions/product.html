@@ -1,5 +1,7 @@
 {% extends "auctions/layout.html" %}
 
+{% block title %} {{listing.title}} {%endblock%}
+
 {% block styles %}
 <style>
     /* Override generic hover styles only on this page */
@@ -93,14 +95,7 @@
 
                 <!-- heavy if-else logic now -->
                 {% if user.is_authenticated %}
-                    <!-- <div>
-                        <form action = "{% url 'sell' listing.id %}" method="post">
-                                <input type="hidden" name="user" value="{{ request.user }}">
-                                {%csrf_token%}
-                                <button type="toggle" style="width: 170px; height: 50px; background-color: antiquewhite; 
-                                border-radius:20px; border: solid rosybrown; padding: 7px 20px;">Add to watchlist</button>
-                        </form>
-                    </div> -->
+                    
                     <div class="new_bid" style="
                         /* background-color: pink; */
                         width: 400px;
@@ -142,7 +137,20 @@
     </div> 
 
     <div class="comment-wrap" style="margin-left: 20px; display: flex; flex-direction: column; text-align: center;">
-        <div style="height: 50px;"></div>
+        <div style="height: 50px; margin-bottom: 10px;">
+            {% if user.is_authenticated %}
+                    <div>
+                        <form action = "{% url 'like' listing.id %}" method="post">
+                                <!-- <input type="hidden" name="user" value="{{ request.user }}"> -->
+                                {%csrf_token%}
+                                <button type="toggle" style="width: 220px; height: 50px; background-color: rgb(166, 115, 125); 
+                                border-radius:20px; border: solid rosybrown; color: white; padding: 7px 10px;">
+                                {% if added %}Remove from WatchList{%else%}Add to WatchList{%endif%}
+                                 </button>
+                        </form>
+                    </div>
+            {%endif%}
+        </div>
         <div class="comments" style="
             text-align: left;
             height: 300px;
