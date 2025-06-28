@@ -1,0 +1,117 @@
+ /* Override generic hover styles only on this page */
+    .cards_container:hover {
+        box-shadow: none !important;
+        transform: none !important;
+        cursor: default !important;
+    }
+
+   
+
+    .cards_wrapper {
+        justify-content: flex-start;
+        /* background-color: green; */
+        width: 325px;
+    }
+
+    .cards_container {
+        margin-left: 30px;
+    }
+
+    .image-wrapper img {
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+
+    .product-info {
+        /* background-color: rgb(78, 51, 124); */
+        height: 600px;
+        width: 680px !important;
+    }
+
+    .product-intro {
+        /* background-color: red; */
+        height: 40px;
+        margin-left: 30px;
+    }
+
+    .bids-wrap {
+        /* background-color: green; */
+        display: flex;
+    }
+
+    .all-bids {
+        height: auto;
+        width: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 10px;
+        background-color: transparent;
+    }
+
+    .new_bid {
+        /* background-color: pink; */
+        width: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sell-button {
+        width: 170px;
+        height: 50px;
+        background-color: antiquewhite;
+        border-radius: 20px;
+        border: solid rosybrown;
+        color: rgb(108, 9, 9);
+        padding: 7px 20px;
+    }
+
+    .bid-now-header {
+        width: 100%;
+        text-align: center;
+        margin-left: 0px;
+    }
+
+    #newlisting-btn {
+        width: auto !important;
+        margin-top: 20px;
+        padding: 7px 20px;
+    }
+
+    .comment-wrap {
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .watchlist-button {
+        width: 220px;
+        height: 50px;
+        background-color: rgb(166, 115, 125);
+        border-radius: 20px;
+        border: solid rosybrown;
+        color: white;
+        padding: 7px 10px;
+    }
+
+    .comments {
+        text-align: left;
+        height: 300px;
+        width: 350px;
+        overflow-y: auto;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        padding: 10px;
+        background-color: #ebe3e3;
+    }
+
+    .submit-comment-button {
+        width: auto !important;
+        margin-top: 0px;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 20px;
+        background-color: rgba(169, 71, 55, 0.99);
+    }

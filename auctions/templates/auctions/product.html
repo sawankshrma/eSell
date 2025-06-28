@@ -1,31 +1,24 @@
-{% extends "auctions/layout.html" %}
 
-{% block title %} {{listing.title}} {%endblock%}
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %} {{listing.title}} {% endblock %}
 
 {% block styles %}
-<style>
-    /* Override generic hover styles only on this page */
-    .cards_container:hover {
-        box-shadow: none !important;
-        transform: none !important;
-        cursor: default !important;
-    }
-</style>
+    {{ block.super }}  {# Keeps the base.css link #}
+    <link href="{% static 'auctions/product.css' %}" rel="stylesheet">
 {% endblock %}
 
+
+
 {% block body %}
-<div class="product-wrap" style="
-    /* background-color: pink; */
-">
-    <div class="cards_wrapper" style="
-        justify-content: flex-start;
-        /* background-color: green; */
-        width: 325px;
-    ">
-        <div class="cards_container" style="margin-left: 30px;">
+<div class="product-wrap">
+
+    <div class="cards_wrapper">
+        <div class="cards_container">
             <div class="image-wrapper">
                 {% if listing.image_url %}
-                    <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image" style="border: 1px solid transparent; border-radius: 5px;">
+                    <img src="{{ listing.image_url|safe }}" alt="{{ listing.title }} image">
                 {% else %}
                     <div class="no-image">No image available</div>
                 {% endif %}
@@ -47,20 +40,12 @@
         </div>
     </div>      
 
-    <div class="product-info" style="
-        /* background-color: rgb(78, 51, 124); */
-        height: 600px;
-        width: 680px !important;
-    ">
-        <div class="product-intro" style="
-            /* background-color: red; */
-            height: 40px;
-            margin-left: 30px;
-        ">
+    <div class="product-info">
+        <div class="product-intro">
             <h4>{{ listing.title }}</h4>
             <hr>
             <h5><strong>Description:-</strong></h5>
-            <div >
+            <div>
                 {{ listing.description }}
                 <ul><br>
                     <li>
@@ -70,19 +55,8 @@
                 </ul>
             </div>
 
-            <div class="bids-wrap" style="
-                /* background-color: green; */
-                display: flex;
-            ">
-                <div class="all-bids" style="
-                    height: auto;
-                    width: 300px;
-                    overflow-y: auto;
-                    border: 1px solid #ccc;
-                    border-radius: 6px;
-                    padding: 10px;
-                    background-color: transparent;
-                ">
+            <div class="bids-wrap">
+                <div class="all-bids">
                     <strong>All Recent Bids:-</strong>
                     <ul>
                         {% for bid in bids %}
@@ -93,39 +67,26 @@
                     </ul>
                 </div>
 
-                <!-- heavy if-else logic now -->
                 {% if user.is_authenticated %}
-                    
-                    <div class="new_bid" style="
-                        /* background-color: pink; */
-                        width: 400px;
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: center;
-                    ">
+                    <div class="new_bid">
                         {% if listing.is_active %}
                             {% if request.user == listing.owner and listing.bids.all %}
-                                <!-- add option to finally sell -->
-                                 <form action = "{% url 'sell' listing.id %}" method="post">
-                                    <!-- <input type="hidden" name="user" value="{{ request.user }}"> -->
-                                        {%csrf_token%}
-                                        <button type="submit" style="width: 170px; height: 50px; background-color: antiquewhite; 
-                                        border-radius:20px; border: solid rosybrown; color:rgb(108, 9, 9); padding: 7px 20px;"
-                                        onclick="return confirm('Are you sure you want to sell this item @ ₹{{ listing.current_bid }}?')">Sell this Item</button>
-                                 </form>
-                            
-                            {% elif request.user != listing.owner%}
-                                <h2 style="width: 100%; text-align: center; margin-left:0px;"><br>Bid Now..<br></h2>
+                                <form action="{% url 'sell' listing.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="sell-button"
+                                        onclick="return confirm('Are you sure you want to sell this item @ ₹{{ listing.current_bid }}?')">
+                                        Sell this Item
+                                    </button>
+                                </form>
+                            {% elif request.user != listing.owner %}
+                                <h2 class="bid-now-header"><br>Bid Now..<br></h2>
                                 <form action="{% url 'bid' listing.id %}" method="post">
                                     {% csrf_token %}
                                     {{ form2 }}
                                     <div id="btn-wrapper">
-                                        <input id="newlisting-btn" class="btn btn-primary login-button" 
-                                               style="width: auto !important; margin-top:20px; padding: 7px 20px;"
-                                               type="submit" value="Raise Bid">
+                                        <input id="newlisting-btn" class="btn btn-primary login-button" type="submit" value="Raise Bid">
                                     </div>
                                 </form>
-                            <!-- {{else}} -->
                             {% endif %}
                         {% else %}
                             <h2><br>Sold Out</h2>
@@ -136,31 +97,21 @@
         </div>
     </div> 
 
-    <div class="comment-wrap" style="margin-left: 20px; display: flex; flex-direction: column; text-align: center;">
+    <div class="comment-wrap">
         <div style="height: 50px; margin-bottom: 10px;">
             {% if user.is_authenticated %}
-                    <div>
-                        <form action = "{% url 'like' listing.id %}" method="post">
-                                <!-- <input type="hidden" name="user" value="{{ request.user }}"> -->
-                                {%csrf_token%}
-                                <button type="toggle" style="width: 220px; height: 50px; background-color: rgb(166, 115, 125); 
-                                border-radius:20px; border: solid rosybrown; color: white; padding: 7px 10px;">
-                                {% if added %}Remove from WatchList{%else%}Add to WatchList{%endif%}
-                                 </button>
-                        </form>
-                    </div>
-            {%endif%}
+                <div>
+                    <form action="{% url 'like' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="toggle" class="watchlist-button">
+                            {% if added %}Remove from WatchList{% else %}Add to WatchList{% endif %}
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
         </div>
-        <div class="comments" style="
-            text-align: left;
-            height: 300px;
-            width: 350px;
-            overflow-y: auto;
-            border: 2px solid #ccc;
-            border-radius: 6px;
-            padding: 10px;
-            background-color: #ebe3e3;
-        ">
+
+        <div class="comments">
             <h5>Comments:-</h5>
             <ul>
                 {% for comment in comments %}
@@ -177,9 +128,7 @@
                     {% csrf_token %}
                     {{ form3 }}
                     <div id="btn-wrapper">
-                        <input id="newlisting-btn" class="btn btn-primary login-button" 
-                               style="width: auto !important; margin-top:0px; padding: 5px 20px; border: none; border-radius: 20px; background-color: rgba(169, 71, 55, 0.99);"
-                               type="submit" value="submit">
+                        <input id="newlisting-btn" class="btn btn-primary login-button submit-comment-button" type="submit" value="submit">
                     </div>
                 </form>
             </div>

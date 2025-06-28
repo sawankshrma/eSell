@@ -6,9 +6,7 @@
     <h2>New Listing</h2>
 
     {% if user.is_authenticated %}
-        <!-- <div class="new-listing-msg">
-            Signed in as_ <strong>{{ user.username }}</strong>.
-        </div> -->
+       
 
         <form action="{% url 'newlisting' %}" method="post">
             <div class = "wrapper-1">
