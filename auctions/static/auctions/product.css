@@ -75,7 +75,7 @@
 
     #newlisting-btn {
         width: auto !important;
-        margin-top: 20px;
+        margin-top: 5px;
         padding: 7px 20px;
     }
 
@@ -114,4 +114,8 @@
         border: none;
         border-radius: 20px;
         background-color: rgba(169, 71, 55, 0.99);
+    }
+
+    h4{
+        color:rgb(70, 21, 6)
     }

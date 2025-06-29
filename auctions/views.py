@@ -5,7 +5,9 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import User, Listing
+
+
+from .models import User, Listing, Bid
 from .forms import ListingForm, BiddingForm, CommentForm
 
 
@@ -157,7 +159,7 @@ def bid(request, product_id):
 
             return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
         else:
-            return render(request, "auctions/Product.html", {
+            return render(request, "auctions/product.html", {
                 "listing": product,
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
@@ -196,7 +198,7 @@ def comment(request, product_id):
             comment.save()
             return HttpResponseRedirect(reverse("product", kwargs={"product_id": product_id}))
         else:
-            return render(request, "auctions/Product.html", {
+            return render(request, "auctions/product.html", {
                 "listing": product,
                 "comments": product.comments.all(),
                 "bids": product.bids.all(),
@@ -236,7 +238,7 @@ def product(request, product_id):
     if request.user.is_authenticated:
         context["added"] = is_in_watchlist(request.user, product)
 
-    return render(request, "auctions/Product.html", context)
+    return render(request, "auctions/product.html", context)
 
 
 @login_required
@@ -246,6 +248,16 @@ def sell(request, product_id):
     except Listing.DoesNotExist:
         raise Http404("Product not found.")
     product.is_active = False
+
+
+    all_bids = product.bids.all()
+    greatest_amount = all_bids.first().amount  
+    for bid in reversed(all_bids):
+        if bid.amount == greatest_amount:
+            owner_bid = bid
+            break
+    product.winner = owner_bid.user
+
     product.save()
     return render(request, "auctions/product.html", {
         "listing": product,
@@ -271,12 +283,5 @@ def like(request, product_id):
     # No need to manually save user or product for M2M changes.
 
 
-    return render(request, "auctions/product.html", {
-        "listing": product,
-        "comments": product.comments.all(),
-        "bids": product.bids.all(),
-        "form2": BiddingForm(),
-        "form3" : CommentForm(),
-        "added" : is_in_watchlist(request.user, product)
-    })
+    return redirect('product', product_id)
 
