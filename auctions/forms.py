@@ -44,7 +44,7 @@ class BiddingForm(forms.ModelForm):
         widgets = {
             'amount': forms.TextInput(attrs={
                 'placeholder': 'Enter the amount..',
-                'style' : 'height:70px; border-radius: 15px; width: 100%; padding: 7px; font-size:larger; '
+                'style' : 'height:55px; border-radius: 15px; width: 100%; padding: 7px; font-size:larger; '
             }),
         }
 
@@ -56,10 +56,10 @@ class CommentForm(forms.ModelForm):
             'text': ''
         }
         widgets = {
-            'text': forms.Textarea(attrs={
+            'text': forms.TextInput(attrs={
                 
                 'placeholder': 'Add a comment..',
-                'style': 'width: 85%; height: 90px; padding : 10px; background-color: transparent; border-radius:20px;'
+                'style': 'width: 85%; height: 60px; padding : 10px; background-color: transparent; border-radius:20px;'
 
             }),
         }
