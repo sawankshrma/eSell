@@ -135,7 +135,7 @@ def bid(request, product_id):
                 raise Http404("Product not found.")
             if bidding.amount < product.current_bid:
                 bidding.listing = product
-                form2.add_error('amount', "Bid must be greater than the current bid.")
+                form2.add_error('amount', "Bid cannot be lesser than the current bid.")
                 product = bidding.listing
 
                 
