@@ -3,9 +3,10 @@
 A Django-powered eCommerce platform where users can list products, bid on auctions, and leave comments.<br>
 Inspired by **eBay**-like functionality.
 
-### 🚀 Deployed → [Click here to view live](https://esell-wki6.onrender.com)
+🚀 Deployed → [Click here to view live](https://esell-wki6.onrender.com) (might take a few seconds to open for the first time)
 
-This project takes the idea from the Project 2 of the [CS50 Web Programming](https://cs50.harvard.edu/web/2020/) course.
+
+- This project takes the idea from the Project 2 of the [CS50 Web Programming](https://cs50.harvard.edu/web/2020/) course.
 
 ---
 
