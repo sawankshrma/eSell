@@ -133,9 +133,25 @@ def bid(request, product_id):
                 product = Listing.objects.get(id=product_id)
             except Listing.DoesNotExist:
                 raise Http404("Product not found.")
-            if bidding.amount < product.current_bid:
+            
+            all_bids = product.bids.all()
+            if not all_bids:
+                if bidding.amount < product.starting_bid:
+                    bidding.listing = product
+                    form2.add_error('amount', "Bid cannot be lesser than the Initial Bid.")
+                    product = bidding.listing
+                    return render(request, "auctions/product.html", {
+                        "listing": product,
+                        "comments": product.comments.all(),
+                        "bids": product.bids.all(),
+                        "form2": form2,
+                        "form3" : CommentForm(),
+                        "added" : is_in_watchlist(request.user, product)
+                    })
+
+            elif bidding.amount <= product.current_bid:
                 bidding.listing = product
-                form2.add_error('amount', "Bid must be greater than the current bid.")
+                form2.add_error('amount', "Bid must be greater than the current Bid.")
                 product = bidding.listing
 
                 
@@ -211,15 +227,9 @@ def comment(request, product_id):
         product = Listing.objects.get(id=product_id)
     except Listing.DoesNotExist:
         raise Http404("Product not found.")
-    return render(request, "auctions/product.html", {
-        "listing": product,
-        "comments": product.comments.all(),
-        "bids": product.bids.all(),
-        "form2": BiddingForm(),
-        "form3" : CommentForm(),
-        "added" : is_in_watchlist(request.user, product)
+    return redirect('product', product_id)
 
-    })
+
 
 
 def product(request, product_id):
@@ -246,27 +256,21 @@ def sell(request, product_id):
     try:
         product = Listing.objects.get(id=product_id)
     except Listing.DoesNotExist:
-        raise Http404("Product not found.")
-    product.is_active = False
+        raise Http404("Product not found.")\
+        
+    # a user who is not the ownner could sell it through the url ../<product_id>/Sell so that is changed now
+    if request.user == product.owner:
+        product.is_active = False
 
 
-    all_bids = product.bids.all()
-    greatest_amount = all_bids.first().amount  
-    for bid in reversed(all_bids):
-        if bid.amount == greatest_amount:
-            owner_bid = bid
-            break
-    product.winner = owner_bid.user
+        all_bids = product.bids.all()
+        product.winner = all_bids.first().user
 
-    product.save()
-    return render(request, "auctions/product.html", {
-        "listing": product,
-        "comments": product.comments.all(),
-        "bids": product.bids.all(),
-        "form2": BiddingForm(),
-        "form3" : CommentForm(),
-        "added" : is_in_watchlist(request.user, product)
-    })
+        product.save()
+        return redirect('product', product_id)
+        
+    else:
+        return redirect('product', product_id)
 
 @login_required
 def like(request, product_id):
