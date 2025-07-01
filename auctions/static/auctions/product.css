@@ -4,7 +4,9 @@
         transform: none !important;
         cursor: default !important;
     }
-
+ #nt-signed-in{
+    color:rgb(136, 6, 6);
+ }
    
 
     .cards_wrapper {

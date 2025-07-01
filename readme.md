@@ -28,7 +28,7 @@ This project takes the idea from the Project 2 of the [CS50 Web Programming](htt
 |-------------------------------|----------------------------|
 | ![](assets/browse.gif)        | ![](assets/admin.gif)      |
 
-| 🛍️ Listing a Product          | 💸 Placing a Bid & Commenting         |
+| 🛍️ Selling a Product          | 💸 Placing a Bid & Commenting         |
 |-------------------------------|----------------------------|
 | ![](assets/sell.gif)          | ![](assets/bid.gif)        |
 
@@ -98,8 +98,9 @@ This project comes with a pre-built **SQLite database** (`db.sqlite3`) already i
 
 ---
 
-## ✅ Why Are the Data Different?
-
+<details>
+<summary>Why Are the Data Different?</summary>
+   
 The deployed site ([https://esell-wki6.onrender.com](https://esell-wki6.onrender.com)) uses a **hosted PostgreSQL** database on Render.
 
 The cloned project contains a local **SQLite file**. These are **two separate environments** and are **not synced**, so:
@@ -108,14 +109,18 @@ The cloned project contains a local **SQLite file**. These are **two separate en
 - Users/accounts will be local
 - Admin changes won’t reflect online
 
+</details>
+
 ---
 
 
 ## 🛠️ If you want to use your own clean database (SQLite or PostgreSQL), here’s how you can:
 
-### Rebuild SQLite from scratch
 
-```
+
+<details>
+<summary>Rebuild SQLite from scratch</summary>
+
 1. Delete the existing database:\
    `del db.sqlite3` (or `rm db.sqlite3` on Linux/macOS)
 
@@ -124,10 +129,9 @@ The cloned project contains a local **SQLite file**. These are **two separate en
 
 3. (Optional) Create a superuser for admin access:\
    `python manage.py createsuperuser`
-```
+</details>
 
 ---
 > 🚀 Kicking things off with my first full-stack web project. Excited to build more from here 😊
-
 
 

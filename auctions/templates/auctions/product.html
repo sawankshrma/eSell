@@ -50,7 +50,7 @@
                 <ul><br>
                     <li>
                         Seller:- <strong>@{{ listing.owner.username }}</strong>, email_id: <strong>{{ listing.owner.email }}</strong>
-                        <br> Initial Bid:- <strong>₹</strong> {{ listing.starting_bid }}/-
+                        <br> Initial Bid:- <strong>₹</strong> {{ listing.starting_bid }}<strong>/-</strong>
                     </li><br>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
                     <strong>All Recent Bids:-</strong>
                     <ul>
                         {% for bid in bids %}
-                            <li>@{{ bid.user.username }}:- <strong>₹</strong>{{ bid.amount }}</li>
+                            <li>@{{ bid.user.username }}:- <strong>₹</strong>{{ bid.amount }}<strong>/-</strong></li>
                         {% empty %}
                             <li>No bids made yet.</li>
                         {% endfor %}
@@ -93,6 +93,10 @@
                             {%else%}
                             <h4><br>Sold to <strong>@{{listing.winner.username}}</strong></h4>{%endif%}
                         {% endif %}
+                    </div>
+                {% else %} 
+                    <div class="new_bid">
+                        <p id = "nt-signed-in"><br><strong>Not signed in!</strong><br>Please login/register to <br> participate in the Auction or have access <br> to Comment or WatchList feature.</p>                                                     
                     </div>
                 {% endif %}
             </div>
